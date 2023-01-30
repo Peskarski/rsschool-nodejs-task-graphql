@@ -1,0 +1,410 @@
+{
+	"info": {
+		"_postman_id": "e557e706-5efe-487d-a839-463c36fb2fe0",
+		"name": "qraphql collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16440174"
+	},
+	"item": [
+		{
+			"name": "2.8 create user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\n    createUser(user: {\n        firstName: \"Name\",\n        lastName: \"Surname\",\n        email: \"new@example\"\n    }) {\n        id\n        firstName\n        lastName\n    }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/graphql",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.9 create profile",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\n    createProfile (profile: {\n        userId: {id},\n        sex: \"male\",\n        street: \"street\",\n        avatar: \"avatar\",\n        birthday: 1000,\n        country: \"Belarus\",\n        city: \"Braslav\",\n        memberTypeId: \"basic\"\n    }) {\n        id\n    }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/graphql",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.10 create post",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\n    createPost (post: {\n        userId: {id},\n        title: \"Title\",\n        content: \"Content\"\n    }) {\n        id\n    }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/graphql",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.1 get users, profiles, posts, memberTypes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query {\n    users {\n        id\n    }\n    posts {\n        id\n    }\n    profiles {\n        id\n    }\n    memberTypes {\n        id\n    }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/graphql",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.2 get user, post, profile, memberType by id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($userId: ID, $profileId: ID, $postId: ID, $memberTypeId: ID) {\n    user (id: $userId) {\n        id\n    }\n\n    profile (id: $profileId) {\n        id\n    }\n\n    post (id: $postId) {\n        id\n    }\n\n    memberType (id: $memberTypeId) {\n        id\n    }\n}",
+						"variables": "{\n    \"userId\": \"\",\n    \"profileId\": \"\",\n    \"postId\": \"\",\n    \"memberTypeId\": \"\"\n}"
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/graphql",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.3 Get users with their posts, profiles, memberTypes.",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query {\n    users {\n        id\n        posts {\n            id\n        }\n        profile {\n            id\n        }\n        memberType {\n            id\n        }\n    }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/graphql",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.4. Get user by id with his posts, profile, memberType",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id: ID) {\n    user (id: $id) {\n        id\n        posts {\n            id\n        }\n        profile {\n            id\n        }\n        memberType {\n            id\n        }\n    }\n}",
+						"variables": "{\n    \"id\": \"\"\n}"
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/graphql",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.5. Get users with their userSubscribedTo, profile.",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query {\n    users {\n        id\n        profile {\n            id\n        }\n        userSubscribedTo {\n            id\n        }\n    }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/graphql",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.6. Get user by id with his subscribedToUser, posts.",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query ($id: ID) {\n    user (id: $id) {\n        id\n        posts {\n            id\n        }\n        subscribedToUser {\n            id\n        }\n    }\n}",
+						"variables": "{\n    \"id\": \"\"\n}"
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/graphql",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.7 Get users with their userSubscribedTo, subscribedToUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query {\n    users {\n        id\n        userSubscribedTo {\n            id\n            userSubscribedTo {\n                id\n            }\n            subscribedToUser {\n                id\n            }\n        }\n        subscribedToUser {\n            userSubscribedTo {\n                id\n            }\n            subscribedToUser {\n                id\n            }\n        }\n    }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/graphql",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.12. Update user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\n    updateUser (user: {\n        id: {id},\n        firstName: \"New name\",\n        lastName: \"New surname\",\n        email: \"new email\"\n    }) {\n        firstName\n        lastName\n        email\n        id\n    }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/graphql",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.13. Update profile.",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\n    updateProfile (profile: {\n        id: {id},\n        country: \"New country\",\n        city: \"New city\"\n    }) {\n       id\n       country\n       city\n    }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/graphql",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.14. Update post.",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\n    updatePost (post: {\n        id: {id},\n        title: \"New title\",\n        content: \"New content\"\n    }) {\n       id\n       title\n       content\n    }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/graphql",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.15 Update memberType.",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation {\n    updateMemberType (memberType: {\n        id: \"basic\"\n        discount: 50\n        monthPostsLimit: 40\n    }) {\n       id\n       discount\n       monthPostsLimit\n    }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/graphql",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.16. Subscribe to",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id: ID!, $subscribeToId: ID!) {\n    subscribeTo(id: $id, subscribeToId: $subscribeToId) {\n        id\n        subscribedToUserIds\n    }\n}",
+						"variables": "{\n    \"id\": \"\",\n    \"subscribeToId\": \"\"\n}"
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/graphql",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.16 unsubscribe from",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation ($id: ID!, $unsubscribeFromId: ID!) {\n    unsubscribeFrom(id: $id, unsubscribeFromId: $unsubscribeFromId) {\n        id\n        subscribedToUserIds\n    }\n}",
+						"variables": "{\n    \"id\": \"\",\n    \"unsubscribeFromId\": \"\"\n}"
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/graphql",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

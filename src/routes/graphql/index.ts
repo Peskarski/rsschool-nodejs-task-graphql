@@ -168,9 +168,15 @@ const plugin: FastifyPluginAsyncJsonSchemaToTs = async (
                   throw fastify.httpErrors.badRequest('Member type was not found');
                 }
 
-                const user = await fastify.db.profiles.findOne({ key: 'userId', equals: profile.userId });
+                const user = await fastify.db.users.findOne({ key: 'id', equals: profile.userId });
 
-                if (user) {
+                if (!user) {
+                  throw fastify.httpErrors.badRequest('User does not exist');
+                }
+
+                const userWithProfile = await fastify.db.profiles.findOne({ key: 'userId', equals: profile.userId });
+
+                if (userWithProfile) {
                   throw fastify.httpErrors.badRequest('User already has profile');
                 }
 
