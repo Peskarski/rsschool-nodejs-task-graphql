@@ -5,7 +5,10 @@ import {
   graphql,
   GraphQLID,
   GraphQLNonNull,
+  validate,
+  parse,
 } from 'graphql';
+import * as depthLimit from 'graphql-depth-limit';
 import { FastifyPluginAsyncJsonSchemaToTs } from '@fastify/type-provider-json-schema-to-ts';
 import { graphqlBodySchema } from './schema';
 import {
@@ -21,6 +24,8 @@ import {
   UpdateProfile,
   UpdateMemberType,
 } from './types';
+
+const DEPTH_LIMIT = 6;
 
 const plugin: FastifyPluginAsyncJsonSchemaToTs = async (
   fastify
@@ -323,6 +328,15 @@ const plugin: FastifyPluginAsyncJsonSchemaToTs = async (
           }
         })
       });
+
+      const errors = validate(schema, parse(request.body.query!), [depthLimit(DEPTH_LIMIT)]);
+
+      if (errors.length) {
+        return {
+          errors: errors,
+          data: null,
+        };
+      }
 
       const result = await graphql({
         schema,
